@@ -27,8 +27,13 @@ let a = 1 in
 		a + b ;; (* 4 *)
 
 (* Ex. 3 *)
-let k =0 in
-	for k = 0 to 10 do 2 * k + 1 done ;;
+(*
+let print n  =
+	let p = ref 0 in
+		for k = 0 to n do p := 2 * k + 1 done ;
+			!p ;;
+for n = 0 to 10 do print n done ;;
+*)
 
 (* Ex. 4 *)
 
