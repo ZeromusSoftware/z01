@@ -299,6 +299,30 @@ binomial1 (2,3.);;
 
 (* Ex. 16 *)
 
+let pascal n =
+	let v0 = ref ( make_vect 2 1 ) in
+		print_newline () ;
+		print_string ( "1" ) ;
+		print_newline () ;
+		for k = 1 to n-2 do (
+			let v = ref ( make_vect ( vect_length !v0 + 1 ) 1 ) in
+				print_int !v.(0);
+				print_string " ";
+				for i = 1 to ( vect_length !v0 - 2 ) do (
+					!v.(i) <- !v0.(i) + !v0.(i-1) ;
+					print_int( !v.(i) ) ;
+					print_string " "
+				)
+				done ;
+				print_int !v.(0);
+				print_string " " ;
+				print_newline () ;
+				v0 := !v
+		)
+		done
+;;
+pascal 6 ;;
+
 (* ---------------------------------------------------------------------------- *)
 
 (* Ex. 17 *)
@@ -343,6 +367,13 @@ let h u x = ( u x ) + 1 ;; (* ( 'a -> int ) -> 'a -> int *)
 (* ---------------------------------------------------------------------------- *)
 
 (* Ex. 20 *)
+
+let prod_tensoriel (x,y) =
+	let f x = (x+1) in
+	let g y = (y+2) in
+		f x * g y	
+;;
+	(* ( int * int ) -> int *)
 
 (* ---------------------------------------------------------------------------- *)
 (* ------------------------END OF FILE---------------------------------- *)
