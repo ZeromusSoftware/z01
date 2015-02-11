@@ -174,3 +174,176 @@ let nb_diviseur n =
 		!nb
 ;;
 nb_diviseur 4 ;;
+
+(* ---------------------------------------------------------------------------- *)
+
+(* Ex. 11 *)
+
+let somDiv n =
+	let result = ref 0 in
+	for k = 1 to n do (
+		if ( n mod k = 0 ) then (
+			result := !result + k
+		)
+	)
+	done ;
+	!result
+;;
+somDiv 6;;
+
+let nbParfait n =
+	somDiv n - n
+;;
+nbParfait 6;;
+
+let p = ref 0 in
+for k = 1 to 10000 do (
+	if ( k = nbParfait k ) then (
+		incr p;
+		print_int k;
+		print_newline ()
+	)
+)
+done ;
+!p ;;
+
+c(* ---------------------------------------------------------------------------- *)
+
+(* Ex. 12 *)
+
+let decD n =
+	int_of_float ( 1. +. floor ( log10 ( float_of_int ( n ) ) ) )
+;;
+decD 045;;
+let decB n =
+	let p = ref n in
+	let result = ref 0 in
+		while ( !p > 0 ) do (
+			p := !p / 10 ;
+			incr result
+		)
+		done ;
+		!result
+;;
+decB 045;;
+
+(* ---------------------------------------------------------------------------- *)
+
+(* Ex. 13 *)
+
+let f n =
+	let tmp = ref n in
+	print_newline () ;
+	for i = 1 to n do (
+		let c = ref 0 in
+			for k = i to n do (
+				print_int k ; print_string " " ;
+				incr c
+			)
+			done ;
+			let x = !c in
+			if ( i > 1 ) then (
+				for j = 1 to n-x do (
+					print_int j ; print_string " "  ;
+				)
+				done 
+			) ;
+			print_newline ()
+	)
+	done
+ ;;
+f 12 ;;
+
+(* ---------------------------------------------------------------------------- *)
+
+(* Ex. 14 *)
+
+let fact n =
+	if ( n < 0 ) then ( failwith "Valeur negative interdite !!!" )
+	else (
+		let result = ref 1 in
+		let test = ref 1. in
+			for k = 1 to n do (
+				result := !result * k ;
+				test := !test *. float_of_int k
+			)
+			done ;
+		!result 
+	)
+;;
+fact ();;
+
+(* ---------------------------------------------------------------------------- *)
+
+(* Ex. 15 *)
+
+let binomial0 (k,n) =
+	fact n / ( fact k * fact ( n - k ) )
+;;
+binomial0 (3,3);;
+
+let binomial1 (k,n) =
+	let result = ref n in
+		for i = 1 to k do (
+			result := !result *. (
+				 ( n -. float_of_int ( i ) +. 1. )
+					 /. float_of_int i 
+				)
+		)
+		done ;
+		!result
+;;
+binomial1 (2,3.);;
+
+(* ---------------------------------------------------------------------------- *)
+
+(* Ex. 16 *)
+
+(* ---------------------------------------------------------------------------- *)
+
+(* Ex. 17 *)
+
+let fibonacci n =
+	if ( n = 0 ) then 0
+	else (
+		let tmp = ref 0 in
+		let init = ref 0 in
+		let result = ref 1 in
+			for k = 0 to n-2 do (
+				tmp := !result ;
+				result := !init + !result ;
+				init := !tmp
+			)
+			done ;
+			!result
+	)
+;;
+for k = 0 to 10 do ( print_int (fibonacci k) ; print_string " " ) done ;;
+
+(* ---------------------------------------------------------------------------- *)
+
+(* Ex. 18 *)
+
+let f x = x + 1 in
+let g x = 2 * x in
+let u a b x = a ( b x ) in
+let h = u f g in
+	h 4 ;;
+
+	(* u f g 4 => f ( g 4 ) => f ( 2 * 4 ) => 8 + 1 => 9 :: true *)
+	(* u correspond à la fonction qui "compose" *)
+
+(* ---------------------------------------------------------------------------- *)
+
+(* Ex. 19 *)
+
+let g u x = u ( x + 1 ) + 1 ;; (* ( int -> int ) -> int -> int *)
+let h u x = ( u x ) + 1 ;; (* ( 'a -> int ) -> 'a -> int *)
+
+(* ---------------------------------------------------------------------------- *)
+
+(* Ex. 20 *)
+
+(* ---------------------------------------------------------------------------- *)
+(* ------------------------END OF FILE---------------------------------- *)
+(* ---------------------------------------------------------------------------- *)
